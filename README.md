@@ -1,69 +1,107 @@
-# 🩺 Medical RAG Hallucination Detection
+<div align="center">
 
-A Retrieval-Augmented Generation (RAG) based Medical AI Assistant that answers questions from trusted medical guidelines while detecting hallucinations, providing confidence scores, and performing self-correction.
+# 🩺 Medical RAG — Hallucination Detection System
+
+### Evidence-grounded Medical AI Assistant with Retrieval, Verification, Confidence Scoring & Self-Correction.
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![LangChain](https://img.shields.io/badge/LangChain-RAG-1C3C3C?style=for-the-badge)](https://www.langchain.com/)
+[![FAISS](https://img.shields.io/badge/FAISS-Vector_Search-0467DF?style=for-the-badge)](https://github.com/facebookresearch/faiss)
+[![Sentence Transformers](https://img.shields.io/badge/Sentence_Transformers-Embeddings-FF6F00?style=for-the-badge)](https://www.sbert.net/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Gemini](https://img.shields.io/badge/Gemini-LLM-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+
+</div>
+
+---
+
+## 🩺 Overview
+
+**Medical RAG Hallucination Detection** is a Retrieval-Augmented Generation (RAG) based Medical AI Assistant designed to generate answers from trusted medical documents while checking whether the generated response is sufficiently supported by the retrieved evidence.
+
+The system combines:
+
+- Medical document retrieval
+- Grounded LLM answer generation
+- Evidence-based claim verification
+- Hallucination detection
+- Confidence scoring
+- Self-correction
+
+The core idea is:
+
+> **Retrieve → Generate → Verify → Score → Correct → Respond**
+
+The current prototype uses a trusted medical guideline PDF related to diabetes as its primary knowledge source.
 
 ---
 
 ## 🎯 Project Objective
 
-The goal of this project is to build an AI assistant that:
+The goal of this project is to build a medical AI assistant that:
 
-- Answers medical questions using trusted medical documents.
-- Reduces hallucinations produced by Large Language Models.
-- Provides confidence scores for answers.
-- Detects answers that are not sufficiently supported by retrieved evidence.
+- Answers questions using trusted medical documents.
+- Grounds generated responses in retrieved evidence.
+- Detects potentially unsupported or contradictory claims.
+- Calculates a confidence score for generated answers.
 - Performs self-correction when an answer is unreliable.
+- Provides source and page-level evidence for verification.
 
-The system is designed around a Retrieval-Augmented Generation (RAG) pipeline so that responses can be grounded in trusted medical sources instead of relying only on the language model's internal knowledge.
+The system is designed to reduce the risk of hallucinated medical information by making retrieved evidence an explicit part of the answer-generation and verification pipeline.
 
 ---
 
 ## 👥 Team
 
-- Vivek
-- Mansi
+- **Vivek**
+- **Mansi**
 
 ### Work Division
 
 **Vivek**
 - Dataset collection and preparation
 - Trusted source-document organization
-- Dataset folder management
-- Overall RAG pipeline review
-- Documentation and integration
+- Dataset management
+- Overall pipeline review
+- Documentation
+- Integration
 - Final testing
 
 **Mansi**
-- Coding after the current retrieval stage
-- Mainly Google Colab notebook development
 - LLM integration
 - Hallucination detection
 - Confidence scoring
 - Self-correction
-- Later coding/integration tasks
+- Backend and integration coding
 
-Dataset changes should only be made by Vivek or with Vivek's approval.
+
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Python
-- Google Colab
-- VS Code
-- Git & GitHub
-- LangChain
-- Sentence Transformers
-- FAISS
-- PyMuPDF
-- FastAPI
-- React
-- Tailwind CSS
-- Gemini API
+| Category | Technology |
+|---|---|
+| Language | Python |
+| LLM | Google Gemini API |
+| RAG Framework | LangChain |
+| Embeddings | Sentence Transformers |
+| Embedding Model | `all-MiniLM-L6-v2` |
+| Vector Database | FAISS |
+| PDF Processing | PyMuPDF |
+| Hallucination Detection | NLI + Semantic Similarity |
+| NLI Model | `cross-encoder/nli-deberta-v3-base` |
+| Backend | FastAPI |
+| Frontend | React |
+| Styling | Tailwind CSS |
+| Development | VS Code |
+| Experimentation | Google Colab |
+| Version Control | Git & GitHub |
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```text
 Medical-RAG-Hallucination-Detection/
@@ -90,7 +128,12 @@ Medical-RAG-Hallucination-Detection/
 ├── notebooks/
 │   ├── Notebook_01_Project_Setup.ipynb
 │   ├── Notebook_02_Environment_Setup.ipynb
-│   └── Notebook_03_PDF_Text_Extraction.ipynb
+│   ├── Notebook_03_PDF_Text_Extraction.ipynb
+│   ├── Notebook_04_LLM_Integration.ipynb
+│   ├── Notebook_05_Hallucination_Detection.ipynb
+│   ├── Notebook_06_Confidence_Scoring.ipynb
+│   ├── Notebook_07_Self_Correction.ipynb
+│   └── Notebook_08_Pipeline_Integration.ipynb
 │
 ├── outputs/
 ├── presentation/
@@ -103,44 +146,37 @@ Medical-RAG-Hallucination-Detection/
 ├── .gitignore
 ├── LICENSE
 └── README.md
-📓 Notebook Workflow
+📓 Notebook Development Status
 
-The project is developed step-by-step through separate notebooks.
+The experimental and model-development phase has been completed through Notebook 08.
 
 Notebook 01 — Project Setup
+
 notebooks/Notebook_01_Project_Setup.ipynb
 
-Handles the initial project setup and verifies the connection between the local project repository and GitHub.
+Handles initial project setup and repository verification.
 
 Status
 
 ✅ Completed
 
 Notebook 02 — Environment Setup
+
 notebooks/Notebook_02_Environment_Setup.ipynb
 
-Prepares and verifies the development environment.
+Prepares and verifies the Python/ML development environment.
 
-Current setup includes:
-
-Python environment verification
-Operating system and machine verification
-PyTorch verification
-Google Colab environment setup
-T4 GPU configuration
-Required Python libraries
-Library import testing
-Environment compatibility checks
 Status
 
 ✅ Completed
 
-Notebook 03 — PDF Text Extraction & Retrieval
+Notebook 03 — PDF Text Extraction & FAISS Retrieval
+
 notebooks/Notebook_03_PDF_Text_Extraction.ipynb
 
-This notebook implements the current document-processing and retrieval pipeline.
+Implements the document processing and retrieval foundation.
 
-Current Workflow
+Workflow
 Medical PDF
      ↓
 PDF Text Extraction
@@ -149,464 +185,490 @@ Text Cleaning
      ↓
 Text Chunking
      ↓
-Text Embeddings
+Sentence Embeddings
      ↓
-FAISS Vector Search
+FAISS Vector Index
      ↓
 Similarity Retrieval
-Current Status
+Status
 
 ✅ PDF loading
 ✅ Text extraction
 ✅ Text cleaning
 ✅ Text chunking
 ✅ Embedding generation
-✅ FAISS vector search
+✅ FAISS indexing
 ✅ Similarity retrieval
 
-📊 Current Results
-Source Document
+Current Source Document
 dataset/raw/niddk_guiding_principles_diabetes.pdf
-
-Current document:
-
+Document Information
 Type: Medical diabetes guideline
 Pages: 83
-Processing Results
-Total pages:          83
-Total chunks:         277
-Chunk size:           1000 characters
-Chunk overlap:        200 characters
-Embedding dimension:  384
-Vector database:      FAISS
-Retrieval status:     Successfully tested
+Chunk size: 1000 characters
+Chunk overlap: 200 characters
+Embedding dimension: 384
+Vector database: FAISS
+🤖 Notebook 04 — LLM Integration
 
-Relevant chunks can currently be retrieved from the medical document based on similarity to a user query.
+notebooks/Notebook_04_LLM_Integration.ipynb
 
-🧩 Current RAG Pipeline
-1. Document Loading
+Integrates the retrieved medical context with the Gemini LLM.
 
-The medical PDF is loaded from:
+Workflow
+User Question
+      ↓
+FAISS Retrieval
+      ↓
+Relevant Medical Context
+      ↓
+Grounded Prompt
+      ↓
+Gemini LLM
+      ↓
+Evidence-based Answer
 
+The model is instructed to answer using the retrieved medical context rather than relying only on internal knowledge.
+
+The pipeline also supports abstention when sufficient evidence is not available.
+
+Status
+
+✅ Gemini integration
+✅ Grounded prompting
+✅ Context-based answer generation
+✅ Insufficient-evidence handling
+✅ Retry handling for temporary API errors
+
+🔍 Notebook 05 — Hallucination Detection
+
+notebooks/Notebook_05_Hallucination_Detection.ipynb
+
+This stage checks whether generated answers are supported by retrieved medical evidence.
+
+Two complementary signals are used:
+
+1. Semantic Similarity
+
+Measures how closely the generated answer is related to retrieved medical documents.
+
+2. Natural Language Inference
+
+The retrieved medical evidence is treated as the premise and the generated statement as the hypothesis.
+
+The NLI model evaluates:
+
+Entailment
+Contradiction
+Neutrality
+Support Score
+
+The initial answer-level verification uses:
+
+Support Score =
+0.5 × Semantic Similarity
++
+0.5 × NLI Entailment
+
+The claim-level verification stage later uses an NLI-first evidence score.
+
+Detection Categories
+SUPPORTED
+CONTRADICTED
+POTENTIAL HALLUCINATION
+Status
+
+✅ Semantic similarity verification
+✅ NLI verification
+✅ Contradiction detection
+✅ Claim-level verification
+✅ Hallucination classification
+
+📊 Notebook 06 — Confidence Scoring
+
+notebooks/Notebook_06_Confidence_Scoring.ipynb
+
+The system calculates an overall confidence score using multiple signals.
+
+Confidence Formula
+Confidence =
+0.30 × Answer Semantic Similarity
++
+0.30 × NLI Entailment
++
+0.20 × Retrieval Quality
++
+0.20 × Claim Consistency
+Confidence Levels
+≥ 0.80  → HIGH
+≥ 0.60  → MEDIUM
+< 0.60  → LOW
+
+Confidence is used as an additional signal for deciding whether an answer should be corrected.
+
+Status
+
+✅ Confidence calculation
+✅ Retrieval quality calculation
+✅ Claim consistency
+✅ Confidence bands
+✅ Self-correction trigger logic
+
+🔄 Notebook 07 — Self-Correction
+
+notebooks/Notebook_07_Self_Correction.ipynb
+
+This stage introduces a feedback loop for unreliable answers.
+
+Workflow
+Generated Answer
+      ↓
+Evidence Verification
+      ↓
+Confidence + Hallucination Decision
+      ↓
+Reliable?
+   ↙       ↘
+ YES        NO
+  ↓          ↓
+Return    Self-Correction
+Answer       ↓
+          Evidence
+          Based
+          Revision
+
+The correction process identifies unsupported claims and provides the available evidence to the LLM so that the answer can be revised using only supported information.
+
+Status
+
+✅ Unsupported claim identification
+✅ Evidence collection
+✅ Correction prompt generation
+✅ Self-correction logic
+✅ Correction pipeline testing
+
+🔗 Notebook 08 — Pipeline Integration
+
+notebooks/Notebook_08_Pipeline_Integration.ipynb
+
+This is the final notebook of the experimental development phase.
+
+It combines the major components developed in the previous notebooks into one pipeline.
+
+Integrated Workflow
+User Question
+      ↓
+Document Retrieval
+      ↓
+Medical Context Construction
+      ↓
+Grounded LLM Generation
+      ↓
+Claim Extraction
+      ↓
+Evidence Retrieval
+      ↓
+NLI Verification
+      ↓
+Confidence Scoring
+      ↓
+Hallucination Decision
+      ↓
+Self-Correction
+      ↓
+Final Answer
+Current Pipeline Components
+
+✅ Retrieval
+✅ Context construction
+✅ Grounded answer generation
+✅ Claim extraction
+✅ Claim-level evidence verification
+✅ NLI-based verification
+✅ Confidence scoring
+✅ Hallucination decision
+✅ Self-correction trigger
+✅ Integrated pipeline function
+
+Current Validation
+
+The integrated pipeline was tested using diabetes-related medical questions.
+
+The verification pipeline successfully demonstrated:
+
+Evidence retrieval
+Supported claim detection
+Unsupported claim detection
+Confidence calculation
+Hallucination classification
+Self-correction logic
+
+The final end-to-end Gemini generation test may be limited by external Gemini API quota availability during development.
+
+🧠 Current RAG Architecture
+                ┌──────────────────┐
+                │   User Question  │
+                └────────┬─────────┘
+                         ↓
+                ┌──────────────────┐
+                │  FAISS Retrieval │
+                └────────┬─────────┘
+                         ↓
+                ┌──────────────────┐
+                │ Medical Context  │
+                └────────┬─────────┘
+                         ↓
+                ┌──────────────────┐
+                │   Gemini LLM     │
+                └────────┬─────────┘
+                         ↓
+                ┌──────────────────┐
+                │ Generated Answer │
+                └────────┬─────────┘
+                         ↓
+              ┌──────────────────────┐
+              │ Claim Verification   │
+              │ Semantic + NLI       │
+              └──────────┬───────────┘
+                         ↓
+              ┌──────────────────────┐
+              │ Confidence Scoring   │
+              └──────────┬───────────┘
+                         ↓
+              ┌──────────────────────┐
+              │ Hallucination Check  │
+              └──────────┬───────────┘
+                         ↓
+                  ┌──────────────┐
+                  │ Self-Correct?│
+                  └──────┬───────┘
+                     YES │ NO
+                         ↓
+                ┌──────────────────┐
+                │   Final Answer   │
+                └──────────────────┘
+📚 Dataset
+
+The current prototype uses a trusted medical guideline document related to diabetes.
+
+Current Source
 dataset/raw/niddk_guiding_principles_diabetes.pdf
-2. Text Extraction
+Document
 
-Text is extracted from the PDF using PyMuPDF.
+NIDDK Guiding Principles for the Care of People With or at Risk for Diabetes
 
-3. Text Cleaning
+The document is processed through:
 
-Extracted text is cleaned to remove unnecessary formatting and improve the quality of retrieved content.
+PDF
+ ↓
+Extraction
+ ↓
+Cleaning
+ ↓
+Chunking
+ ↓
+Embedding
+ ↓
+FAISS Index
+ ↓
+Retrieval
 
-4. Text Chunking
+The project is currently based on public medical guideline material and does not use private patient data.
 
-The cleaned document is divided into smaller chunks using:
+📌 Evidence Grounding
 
-RecursiveCharacterTextSplitter
+A central design principle of the system is that medical answers should be grounded in retrieved evidence.
 
-Current configuration:
-
-chunk_size = 1000
-chunk_overlap = 200
-
-Current result:
-
-277 chunks
-5. Embedding Generation
-
-Sentence-transformer embeddings are generated for each chunk.
-
-Current embedding size:
-
-384 dimensions
-6. Vector Storage
-
-FAISS is used for efficient similarity-based vector search.
-
-7. Retrieval
-
-When a query is provided, the system searches the vector index and retrieves the most relevant medical chunks.
-
-The retrieval stage has been successfully tested with diabetes-related queries.
-
-Retrieved results contain information such as:
+Each retrieved chunk contains metadata such as:
 
 Chunk ID
 Page number
-Distance / similarity
+Source document
 Retrieved text
-🔍 Example Retrieval Topics
+Similarity information
 
-The current retrieval system can retrieve relevant sections discussing:
+This allows generated claims to be compared against specific medical evidence.
 
-Diabetes introduction
-Diabetes risk factors
-Diabetes management
-Blood glucose control
-Physical activity
-Cardiovascular disease risk factors
-Diabetes prevention
-Treatment principles
-📚 Dataset
+🧪 Testing & Evaluation
 
-The current project uses a trusted medical guideline document related to diabetes.
+Testing is performed progressively throughout development.
 
-Current source:
+Current testing areas include:
 
-dataset/raw/niddk_guiding_principles_diabetes.pdf
+PDF processing
+Retrieval relevance
+Grounded answer generation
+Semantic similarity
+NLI verification
+Claim-level verification
+Hallucination detection
+Confidence scoring
+Self-correction
+Integrated pipeline behavior
 
-The document contains:
+Future testing will focus on:
 
-83 pages
-
-It is processed through the PDF extraction, cleaning, chunking and embedding pipeline before retrieval.
-
-Dataset Responsibility
-
-Dataset preparation and organization are handled separately from the main coding workflow.
-
-Do not modify, rename or reorganize dataset files without coordination with the dataset owner.
-
-🚀 Next Development Stage
-
-The current FAISS retrieval layer is the foundation for the next stage.
-
-The planned development flow is:
-
-Existing FAISS Retrieval
-        ↓
-Retrieved Medical Context
-        ↓
-LLM Integration
-        ↓
-Grounded Answer Generation
-        ↓
-Evidence / Answer Comparison
-        ↓
-Hallucination Detection
-        ↓
-Confidence Score
-        ↓
-Self-Correction
-        ↓
-Backend Integration
-        ↓
-Frontend Integration
-        ↓
-Testing & Evaluation
-🗺️ Development Roadmap
+End-to-end API testing
+Frontend interaction testing
+Backend/frontend integration
+Response consistency
+Failure handling
+Final system evaluation
+🚀 Current Development Status
 [✓] Project Setup
-        ↓
+       ↓
 [✓] Environment Setup
-        ↓
-[✓] GPU Configuration
-        ↓
+       ↓
 [✓] Medical PDF Added
-        ↓
+       ↓
 [✓] PDF Text Extraction
-        ↓
+       ↓
 [✓] Text Cleaning
-        ↓
+       ↓
 [✓] Text Chunking
-        ↓
+       ↓
 [✓] Embedding Generation
-        ↓
+       ↓
 [✓] FAISS Retrieval
-        ↓
-[ ] LLM Integration
-        ↓
-[ ] Medical Answer Generation
-        ↓
-[ ] Hallucination Detection
-        ↓
-[ ] Confidence Scoring
-        ↓
-[ ] Self-Correction
-        ↓
-[ ] Backend Integration
-        ↓
-[ ] Frontend Integration
-        ↓
-[ ] Testing & Evaluation
-💻 Google Colab Setup
+       ↓
+[✓] LLM Integration
+       ↓
+[✓] Grounded Answer Generation
+       ↓
+[✓] Hallucination Detection
+       ↓
+[✓] Confidence Scoring
+       ↓
+[✓] Self-Correction
+       ↓
+[✓] Pipeline Integration
+       ↓
+[ ] FastAPI Backend
+       ↓
+[ ] React Frontend
+       ↓
+[ ] Backend ↔ Frontend Integration
+       ↓
+[ ] Final Testing & Evaluation
+Current Milestone
 
-For a fresh Colab runtime, use a T4 GPU when required.
+Experimental RAG + Hallucination Detection Pipeline Completed Through Notebook 08
 
-Clone Repository
-!git clone https://github.com/vivek28n/Medical-RAG-Hallucination-Detection.git
-%cd Medical-RAG-Hallucination-Detection
+Next Milestone
 
-If the repository is already cloned:
+FastAPI Backend Development in VS Code
 
-%cd /content/Medical-RAG-Hallucination-Detection
-Verify Repository
-import os
+The notebook/Colab development phase is now considered complete for the current implementation.
 
-print("Current directory:", os.getcwd())
-print("Dataset exists:", os.path.exists("dataset"))
-print("Raw folder exists:", os.path.exists("dataset/raw"))
+💻 Development Workflow
 
-if os.path.exists("dataset/raw"):
-    print("Files:", os.listdir("dataset/raw"))
+The project initially used Google Colab for experimentation and model/pipeline development.
 
-Expected file:
+The development workflow now moves to VS Code for the remaining implementation.
 
-niddk_guiding_principles_diabetes.pdf
-📦 Dependencies
+Completed Experimental Phase
+          ↓
+     Notebooks 01–08
+          ↓
+      VS Code
+          ↓
+    FastAPI Backend
+          ↓
+    React Frontend
+          ↓
+ Backend + Frontend
+     Integration
+          ↓
+ Final Testing
+🔐 Security
 
-For a fresh Colab runtime:
+API keys and secrets must never be committed to GitHub.
 
-!pip install -q \
-    langchain \
-    langchain-community \
-    langchain-text-splitters \
-    faiss-cpu \
-    sentence-transformers \
-    pymupdf \
-    pypdf \
-    fastapi \
-    uvicorn
+Never write:
 
-Then verify imports:
+API_KEY = "actual-secret-key"
 
-import langchain
-import faiss
-import sentence_transformers
-import fitz
-import fastapi
+Use environment variables or secure secret management instead.
 
-print("Required libraries imported successfully!")
+Never commit:
 
-Install required packages before importing them.
+.env
+API keys
+Passwords
+Access tokens
+Private credentials
+⚠️ Medical Disclaimer
 
-⚠️ Common Errors
-No module named 'fitz'
+This project is intended for educational and research purposes only.
 
-Install:
+It is not a replacement for professional medical advice, diagnosis, or treatment.
 
-!pip install -q pymupdf
+The system is designed to retrieve information from trusted medical sources and demonstrate techniques for improving the grounding and reliability of AI-generated medical responses.
 
-Then:
+Users should consult qualified healthcare professionals for medical decisions.
 
-import fitz
-No module named 'langchain_text_splitters'
+🔮 Future Scope
 
-Install:
+Planned future improvements include:
 
-!pip install -q langchain-text-splitters
+FastAPI backend integration
+REST API for the RAG pipeline
+React-based medical assistant interface
+PDF upload and document processing
+Source/page citations in the UI
+Confidence visualization
+Hallucination warnings
+Self-correction display
+Multi-document medical knowledge base
+Additional trusted medical sources
+Improved evaluation datasets
+Robust end-to-end testing
+🤝 Git & GitHub Workflow
 
-Then:
-
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-No module named 'faiss'
-
-Install:
-
-!pip install -q faiss-cpu
-
-Then:
-
-import faiss
-PDF Not Found
-
-Check:
-
-import os
-
-print(os.getcwd())
-print(os.listdir("dataset/raw"))
-
-Expected directory:
-
-/content/Medical-RAG-Hallucination-Detection
-
-Expected file:
-
-dataset/raw/niddk_guiding_principles_diabetes.pdf
-
-Do not add an extra .pdf to the filename.
-
-🤝 Team Collaboration
-
-The project uses Git and GitHub for version control.
-
-Before starting a new coding session:
+Before starting work:
 
 git pull --rebase origin main
 
 After completing a meaningful change:
 
 git status
-
-Add only the required files:
-
 git add <changed-files>
-
-Commit:
-
 git commit -m "Describe the change"
-
-Before pushing:
-
 git pull --rebase origin main
-
-Then:
-
 git push origin main
-Important
 
 Never use:
 
 git push -f
 
-If a merge or rebase conflict occurs, stop and coordinate with the other team member before resolving it.
+If a merge or rebase conflict occurs, coordinate before resolving it.
 
-🔐 Security
-
-Never commit API keys, passwords, tokens or other secrets.
-
-Do NOT write:
-
-API_KEY = "actual-secret-key"
-
-Use environment variables or Colab Secrets instead.
-
-Example:
-
-import os
-
-API_KEY = os.environ.get("API_KEY")
-
-Never commit:
-
-.env
-API keys
-passwords
-access tokens
-private credentials
-👩‍💻 Coding Rules for the Next Stage
-
-The coding workflow should remain incremental.
-
-Work in small notebook cells.
-Run each cell before continuing.
-Fix errors before moving forward.
-Install missing packages before imports.
-Reuse existing variables whenever possible.
-Do not unnecessarily recreate the existing retrieval pipeline.
-Do not change dataset paths without coordination.
-Keep notebook code readable and maintainable.
-Test important components before integration.
-Do not blindly run all cells after an error.
-📓 Future Notebook Organization
-
-The next stages can be separated into notebooks such as:
-
-Notebook_04_LLM_Integration.ipynb
-Notebook_05_Hallucination_Detection.ipynb
-Notebook_06_Confidence_Scoring.ipynb
-Notebook_07_Self_Correction.ipynb
-
-The exact notebook structure may be adjusted as development progresses.
-
-📖 Team Handoff
-
-Detailed instructions for continuing the project are available in:
-
-docs/TEAM_HANDOFF.md
-
-The handoff document contains:
-
-Current project status
-Colab setup
-Dependency installation
-Common error fixes
-Git workflow
-Work division
-Coding rules
-ChatGPT instructions for the coding workflow
-Next development direction
-🧠 ChatGPT Workflow for Coding
-
-When working on the next stage, use ChatGPT as a step-by-step coding assistant.
-
-The preferred workflow is:
-
-One task
-   ↓
-One/few cells
-   ↓
-Run
-   ↓
-Check output
-   ↓
-Fix errors if needed
-   ↓
-Next task
-
-Do not request or execute the entire project implementation at once.
-
-When an error occurs, provide the complete error/output to ChatGPT and fix it before continuing.
-
-🧪 Testing & Evaluation
-
-Testing will be performed progressively as the system develops.
-
-Planned evaluation areas include:
-
-Retrieval relevance
-Answer grounding
-Hallucination detection
-Confidence scoring
-Self-correction
-End-to-end response quality
-
-The final system should be evaluated against trusted medical evidence rather than only judging whether an answer sounds plausible.
-
-⚕️ Medical Disclaimer
-
-This project is intended for research and educational purposes.
-
-It is not a replacement for professional medical advice, diagnosis or treatment.
-
-The system should use trusted medical sources as the basis for retrieval and answer generation.
-
-🔮 Future Vision
-
-The final system aims to provide a medical AI assistant that does more than simply generate an answer.
-
-The intended workflow is:
-
-User Question
-      ↓
-Retrieve Trusted Medical Evidence
-      ↓
-Generate Answer
-      ↓
-Check Answer Against Evidence
-      ↓
-Calculate Confidence
-      ↓
-Hallucination Detected?
-    ↙       ↘
-  YES        NO
-   ↓          ↓
-Self-Correct  Return Answer
-   ↓
-Final Verified Answer
-
-The ultimate goal is to make generated medical responses more:
-
-Grounded
-Transparent
-Reliable
-Evidence-based
-Resistant to hallucination
 📌 Project Status
 
-Current milestone:
+Current Status:
 
-PDF processing → chunking → embeddings → FAISS retrieval completed successfully.
+🟢 RAG experimentation and pipeline development completed through Notebook 08
 
-Next milestone:
+Completed:
 
-LLM integration and grounded medical answer generation.
+Medical PDF processing
+FAISS retrieval
+Gemini grounded generation
+Hallucination detection
+NLI claim verification
+Confidence scoring
+Self-correction
+Integrated pipeline
+
+Next:
+
+⚙️ FastAPI Backend Development
+
+<div align="center">
+🩺 Medical RAG Hallucination Detection
+
+Retrieve → Generate → Verify → Score → Correct
+
+Built with Python, LangChain, FAISS, Sentence Transformers, FastAPI, React & Gemini.
+
+</div> ```
